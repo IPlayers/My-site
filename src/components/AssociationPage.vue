@@ -1,0 +1,39 @@
+<template>
+  <div>
+    <button @click="navigateToMainPage" class="back-button">Retour à la page principale</button>
+    <h1>Association</h1>
+    <p>Contenu de la Page 2</p>
+    <p>
+      <a href="https://alpes-esport.fr" target="_blank" rel="noopener noreferrer">https://alpes-esport.fr</a>
+    </p>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'AssociationPage',
+  methods: {
+    navigateToMainPage() {
+      this.$router.push({ name: 'MainPage' });
+    }
+  }
+}
+</script>
+
+<style scoped>
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+</style>

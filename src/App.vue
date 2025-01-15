@@ -1,28 +1,29 @@
 <template>
-  <div>
-    <img alt="Vue chantier" src="./assets/chantier.jpg">
-    <MainPage msg="Mon site est en cours de construction, à très vite !"/>
+  <div id="app">
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import MainPage from './components/MainPage.vue'
-
 export default {
   name: 'App',
-  components: {
-    MainPage
-  }
 }
 </script>
 
 <style>
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: linear-gradient(170deg, rgba(49, 57, 73, 0.8) 20%, rgba(49, 57, 73, 0.5) 20%, rgba(49, 57, 73, 0.5) 35%, rgba(41, 48, 61, 0.6) 35%, rgba(41, 48, 61, 0.8) 45%, rgba(31, 36, 46, 0.5) 45%, rgba(31, 36, 46, 0.8) 75%, rgba(49, 57, 73, 0.5) 75%), linear-gradient(45deg, rgba(20, 24, 31, 0.8) 0%, rgba(41, 48, 61, 0.8) 50%, rgba(82, 95, 122, 0.8) 50%, rgba(133, 146, 173, 0.8) 100%) #313949;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 10px;
 }
 </style>
