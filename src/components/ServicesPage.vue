@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="services-section">
     <button @click="navigateToMainPage" class="back-button">Retour à la page principale</button>
     <h1>Services</h1>
-    <p>Contenu de la Page 3</p>
+    <p>Découvrez les services que je propose pour vous aider.</p>
   </div>
 </template>
 
@@ -18,6 +18,17 @@ export default {
 </script>
 
 <style scoped>
+.services-section {
+  background: #FCE883;
+  height: 100vh;
+  color: #333;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .back-button {
   position: absolute;
   top: 10px;

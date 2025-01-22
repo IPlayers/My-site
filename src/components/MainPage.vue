@@ -3,18 +3,14 @@
     <h1 class="page-title">Bienvenue sur mon site</h1>
     <div class="grid-container">
 
-      <div class="btn-flip top-left" data-back="Back" data-front="Front" @click="navigateTo('CvPage')"></div>
-
-      <div class="btn-flip top-right" data-back="Back" data-front="Front"></div>
-
-      <div class="btn btn-three">
-          <span>HOVER ME</span>
+      <div class="btn btn-three top-left" @click="navigateTo('CvPage')">
       </div>
-
-      <div class="grid-item top-left" @click="navigateTo('CvPage')">Mon CV</div>
-      <div class="grid-item top-right" @click="navigateTo('AssociationPage')">Mon association</div>
-      <div class="grid-item bottom-left" @click="navigateTo('ServicesPage')">Mes services</div>
-      <div class="grid-item bottom-right" @click="navigateTo('EsportPage')">Mon expérience Esport</div>
+      <div class="btn btn-three top-right" @click="navigateTo('AssociationPage')">
+      </div>
+      <div class="btn btn-three bottom-left" @click="navigateTo('ServicesPage')">
+      </div>
+      <div class="btn btn-three bottom-right" @click="navigateTo('EsportPage')">
+      </div>
 
     </div>
   </div>
@@ -45,30 +41,32 @@ btn three
 */
 
 .btn-three {
-  color: #FFF;
   transition: all 0.5s;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+  
 }
 .btn-three::before {
-  content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
-  background-color: rgba(255,255,255,0.5);
   transition: all 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .btn-three:hover::before {
   opacity: 0 ;
   transform: scale(0.1,0.1);
 }
 .btn-three::after {
-  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -77,99 +75,57 @@ btn three
   z-index: 1;
   opacity: 0;
   transition: all 0.5s;
-  border: 1px solid rgba(255,255,255,0.5);
-  background-color: rgba(0,0,0,0.5);
   transform: scale(0.1,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
 }
 .btn-three:hover::after {
   opacity: 1;
   transform: scale(1,1);
 }
 
-/*
-*=============================================================================
-btn flip
-*=============================================================================
-*/
+.btn-three.top-left::before{
+  background: linear-gradient(#FFFFFF,#FFD700);
+  content: 'CV';
+}
+.btn-three.top-left::after{
+  background: linear-gradient(#FFD700,#FFFFFF);
+  content: 'Pro';
+}
 
-
-.btn-flip {
+.btn-three.top-right::before{
+  background: linear-gradient(#89CFF0, #0057B7);
   opacity: 1;
-  outline: 0;
-  color: #fff;
-  position: relative;
-  text-align: center;
-  letter-spacing: 1px;
-  display: inline-block;
-  text-decoration: none;
-  font-family: "Open Sans";
-  text-transform: uppercase;
-  cursor: pointer;
+  content: 'Mon association';
+}
+.btn-three.top-right::after{
+  background: linear-gradient(180deg, #0057B7, #89CFF0);
+  content: 'Alpes Esport';
 }
 
-.btn-flip:after {
-  top: 0;
-  left: 0;
-  opacity: 0;
-  width: 100%;
-  color: #323237;
-  display: block;
-  transition: 0.5s;
-  position: absolute;
-  background: #adadaf;
-  content: attr(data-back);
-  
-  height: 100%;
+.btn-three.bottom-left::before{
+  background-color: #FFD700;
+  background-image: radial-gradient(circle at center center, #FFD700, #FFD700), repeating-radial-gradient(circle at center center, #FFD700, #FFD700, 23px, transparent 46px, transparent 23px);
+  background-blend-mode: multiply;
+  content: 'Services';
 }
-.btn-flip:before {
-  top: 0;
-  left: 0;
-  opacity: 1;
-  color: #adadaf;
-  display: block;
-  padding: 0 30px;
-  transition: 0.5s;
-  position: relative;
-  background: #323237;
-  content: attr(data-front);
-  
-  height: 100%;
+.btn-three.bottom-left::after{
+  background-color: #FFD700;
+  background-image: radial-gradient(circle at center center, #FFD700, #FFD700), repeating-radial-gradient(circle at center center, #FFD700, #FFD700, 40px, transparent 80px, transparent 40px);
+  background-blend-mode: multiply;
+  content: 'Mes services';
 }
 
-.btn-flip.top-left:hover:after {
-  opacity: 1;
-  transform: translateX(0) translateY(0) rotateX(0) rotateY(0);
+.btn-three.bottom-right::before{
+  background: linear-gradient(#000000, #FFD700 );
+  content: 'Esport';
 }
-
-.btn-flip.top-left:hover:before {
-  opacity: 0;
-  transform: translateX(0) translateY(0) rotateX(90deg) rotateY(-90deg);
-}
-
-.btn-flip.top-left:after {
-  transform: translateX(0) translateY(0) rotateX(0) rotateY(0);
-}
-
-.btn-flip.top-left:before {
-  transform: translateY(0) rotateX(0) translateX(0) RotateY(0);
-}
-
-.btn-flip.top-right:hover:after {
-  opacity: 1;
-  transform: translateX(0) translateY(0) rotateX(0) rotateY(0);
-}
-
-.btn-flip.top-right:hover:before {
-  opacity: 0;
-  transform: translateX(50%) translateY(-50%) rotateX(0) rotateY(0);
-}
-
-.btn-flip.top-right:after {
-  transform: translateX(0) translateY(0) rotateX(0) rotateY(0);
-}
-
-.btn-flip.top-right:before {
-  transform: translateY(0) rotateX(0) translateX(0) RotateY(0);
+.btn-three.bottom-right::after{
+  background: linear-gradient(#FFD700, #000000);
+  content: 'Mon parcours';
 }
 
 /*
@@ -185,12 +141,20 @@ original
   align-items: center;
   height: 100vh;
   text-align: center;
+  background-color: #FFD700;
+  background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #FFD700 15px ), repeating-linear-gradient( #0057B755, #0057B7 );
+  /*
+  background: linear-gradient(170deg, rgba(49, 57, 73, 0.8) 20%, rgba(49, 57, 73, 0.5) 20%, rgba(49, 57, 73, 0.5) 35%, rgba(41, 48, 61, 0.6) 35%, rgba(41, 48, 61, 0.8) 45%, rgba(31, 36, 46, 0.5) 45%, rgba(31, 36, 46, 0.8) 75%, rgba(49, 57, 73, 0.5) 75%), linear-gradient(45deg, rgba(20, 24, 31, 0.8) 0%, rgba(41, 48, 61, 0.8) 50%, rgba(82, 95, 122, 0.8) 50%, rgba(133, 146, 173, 0.8) 100%) #313949;
+  */
+  color: #333;
+  font-family: Arial, sans-serif;
+  text-align: center;
 }
 
 .page-title {
   margin-bottom: 20px;
   font-size: 2em;
-  color: #eeeeee;
+  color: #123456;
 }
 
 .grid-container {
@@ -211,17 +175,7 @@ original
   cursor: pointer;
   font-size: 1.5em;
   transition: background-color 0.5s;
+  position: relative;
 }
 
-.grid-item.bottom-left {
-  background-color: #99ff99; /* Vert clair */
-}
-
-.grid-item.bottom-right {
-  background-color: #ffcc99; /* Orange clair */
-}
-
-.grid-item:hover {
-  opacity: 0.8;
-}
 </style>

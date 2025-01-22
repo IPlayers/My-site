@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="esport-section">
     <button @click="navigateToMainPage" class="back-button">Retour à la page principale</button>
-    <h1>Esport</h1>
-    <p>Contenu de la Page 4</p>
+    <h1>Mon Parcours Esport</h1>
+    <p>Découvrez mes réalisations dans le monde de l'Esport.</p>
   </div>
 </template>
 
@@ -18,6 +18,17 @@ export default {
 </script>
 
 <style scoped>
+.esport-section {
+  background: linear-gradient(180deg, #FFD700, #000000);
+  height: 100vh;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .back-button {
   position: absolute;
   top: 10px;
