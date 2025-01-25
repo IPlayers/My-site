@@ -4,6 +4,7 @@
     <h1>Mon CV</h1>
     <p>Consultez mon parcours professionnel ici.</p>
   </div>
+  <!-- Faire des divs de formes géométriques pour agrémenter des infos -->
 </template>
 
 <script>
@@ -20,13 +21,15 @@ export default {
 <style scoped>
 
 .cv-section {
-  background: #FFFFFF;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+  background-image: url("../assets/magicpattern-confetti.png");
   height: 100vh;
   padding: 20px;
-  color: #333;
+  color: #999;
   font-family: Arial, sans-serif;
   text-align: center;
-  border-top: 10px solid #FFD700;
 }
 
 .back-button {

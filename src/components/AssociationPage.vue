@@ -67,7 +67,7 @@ html, body {
 
 
 .association-page {
-  background: linear-gradient(180deg, #0057B7, #89CFF0);
+  background: linear-gradient(180deg, #1d4ed8, #38bdf8);
   height: 100vh;
   display: flex;
   flex-direction: column;

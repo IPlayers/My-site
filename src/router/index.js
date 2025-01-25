@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/',
     name: 'MainPage',
-    component: MainPage
+    component: MainPage,
   },
   {
     path: '/CV',
@@ -38,5 +38,7 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+document.title = 'Maxime MOIROUD';
 
 export default router

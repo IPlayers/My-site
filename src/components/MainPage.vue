@@ -3,13 +3,15 @@
     <h1 class="page-title">Bienvenue sur mon site</h1>
     <div class="grid-container">
 
-      <div class="btn btn-three top-left" @click="navigateTo('CvPage')">
+      <div class="btn btn-three first" @click="navigateTo('CvPage')">
       </div>
-      <div class="btn btn-three top-right" @click="navigateTo('AssociationPage')">
+      <div class="btn btn-three second" @click="navigateTo('AssociationPage')">
+        <div class="logoAE">
+        </div>
       </div>
-      <div class="btn btn-three bottom-left" @click="navigateTo('ServicesPage')">
+      <div class="btn btn-three third" @click="navigateTo('ServicesPage')">
       </div>
-      <div class="btn btn-three bottom-right" @click="navigateTo('EsportPage')">
+      <div class="btn btn-three fourth" @click="navigateTo('EsportPage')">
       </div>
 
     </div>
@@ -36,6 +38,63 @@ export default {
 
 /*
 *=============================================================================
+original
+*=============================================================================
+*/
+
+.main-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  color: #eee;
+  font-size: 4vw;
+  text-align: center; 
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+  background-image: url("../assets/magicpattern-starry-night.png");
+  
+}
+
+.page-title {
+  margin-bottom: 20px;
+  font-size: 6vw;
+}
+
+.grid-container {
+  display: flex;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+  width: 90%;
+  height: 90%;
+  margin-bottom: 60px;
+}
+
+.grid-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.5s;
+  position: relative;
+}
+
+.logoAE {
+  position: absolute;
+  z-index: 1;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+  background-image: url("../assets/AE_logo.png");
+  content: '';
+}
+
+/*
+*=============================================================================
 btn three
 *=============================================================================
 */
@@ -48,10 +107,9 @@ btn three
   align-items: center;
   cursor: pointer;
   overflow: hidden;
-  
+  width: 25%;
 }
 .btn-three::before {
-  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -61,6 +119,7 @@ btn three
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 5%;
 }
 .btn-three:hover::before {
   opacity: 0 ;
@@ -81,101 +140,72 @@ btn three
   align-items: center;
   cursor: pointer;
   overflow: hidden;
+  border-radius: 5%;
 }
 .btn-three:hover::after {
   opacity: 1;
   transform: scale(1,1);
 }
 
-.btn-three.top-left::before{
-  background: linear-gradient(#FFFFFF,#FFD700);
+.btn-three.first::before{
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+  background-image: url("../assets/magicpattern-confetti.png");
   content: 'CV';
+  
 }
-.btn-three.top-left::after{
-  background: linear-gradient(#FFD700,#FFFFFF);
+.btn-three.first::after{
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+  background-image: url("../assets/magicpattern-confetti.png");
   content: 'Pro';
 }
 
-.btn-three.top-right::before{
-  background: linear-gradient(#89CFF0, #0057B7);
-  opacity: 1;
+.btn-three.second::before{
+  background-size: contain;
+  background-position: center center;
+  background-repeat: repeat;
+  background-image: url("../assets/AEBG.png");
   content: 'Mon association';
 }
-.btn-three.top-right::after{
-  background: linear-gradient(180deg, #0057B7, #89CFF0);
+.btn-three.second::after{
+  background-size: contain;
+  background-position: center center;
+  background-repeat: repeat;
+  background-image: url("../assets/AEBG.png");
   content: 'Alpes Esport';
 }
 
-.btn-three.bottom-left::before{
-  background-color: #FFD700;
-  background-image: radial-gradient(circle at center center, #FFD700, #FFD700), repeating-radial-gradient(circle at center center, #FFD700, #FFD700, 23px, transparent 46px, transparent 23px);
-  background-blend-mode: multiply;
+.btn-three.third::before{
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+  background-image: url("../assets/magicpattern-wave-generator.png");
   content: 'Services';
 }
-.btn-three.bottom-left::after{
-  background-color: #FFD700;
-  background-image: radial-gradient(circle at center center, #FFD700, #FFD700), repeating-radial-gradient(circle at center center, #FFD700, #FFD700, 40px, transparent 80px, transparent 40px);
-  background-blend-mode: multiply;
+.btn-three.third::after{
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+  background-image: url("../assets/magicpattern-wave-generator.png");
   content: 'Mes services';
 }
 
-.btn-three.bottom-right::before{
-  background: linear-gradient(#000000, #FFD700 );
+.btn-three.fourth::before{
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+  background-image: url("../assets/magicpattern-grid-pattern-before.png");
   content: 'Esport';
 }
-.btn-three.bottom-right::after{
-  background: linear-gradient(#FFD700, #000000);
+.btn-three.fourth::after{
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+  background-image: url("../assets/magicpattern-grid-pattern-after.png");
   content: 'Mon parcours';
-}
-
-/*
-*=============================================================================
-original
-*=============================================================================
-*/
-
-.main-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
-  background-color: #FFD700;
-  background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #FFD700 15px ), repeating-linear-gradient( #0057B755, #0057B7 );
-  /*
-  background: linear-gradient(170deg, rgba(49, 57, 73, 0.8) 20%, rgba(49, 57, 73, 0.5) 20%, rgba(49, 57, 73, 0.5) 35%, rgba(41, 48, 61, 0.6) 35%, rgba(41, 48, 61, 0.8) 45%, rgba(31, 36, 46, 0.5) 45%, rgba(31, 36, 46, 0.8) 75%, rgba(49, 57, 73, 0.5) 75%), linear-gradient(45deg, rgba(20, 24, 31, 0.8) 0%, rgba(41, 48, 61, 0.8) 50%, rgba(82, 95, 122, 0.8) 50%, rgba(133, 146, 173, 0.8) 100%) #313949;
-  */
-  color: #333;
-  font-family: Arial, sans-serif;
-  text-align: center;
-}
-
-.page-title {
-  margin-bottom: 20px;
-  font-size: 2em;
-  color: #123456;
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 10px;
-  width: 90%;
-  height: 90%;
-  margin-bottom: 60px;
-}
-
-.grid-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  font-size: 1.5em;
-  transition: background-color 0.5s;
-  position: relative;
 }
 
 </style>

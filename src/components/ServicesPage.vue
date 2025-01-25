@@ -19,9 +19,12 @@ export default {
 
 <style scoped>
 .services-section {
-  background: #FCE883;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+  background-image: url("../assets/magicpattern-wave-generator.png");
   height: 100vh;
-  color: #333;
+  color: #eee;
   text-align: center;
   font-family: Arial, sans-serif;
   display: flex;

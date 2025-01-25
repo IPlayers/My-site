@@ -4,6 +4,8 @@
     <h1>Mon Parcours Esport</h1>
     <p>Découvrez mes réalisations dans le monde de l'Esport.</p>
   </div>
+  <!-- Définir une div sur le spaceman pour éviter du contenu dessus -->
+   <!-- Des onglets/fenêtres horizontales à déplier pour avoir le contenu -->
 </template>
 
 <script>
@@ -18,15 +20,32 @@ export default {
 </script>
 
 <style scoped>
+
+@keyframes dynamicBackground {
+  0% {
+    background-size: 100%;
+  }
+  50% {
+    background-size: 105%;
+  }
+  100% {
+    background-size: 100%;
+  }
+}
+
 .esport-section {
-  background: linear-gradient(180deg, #FFD700, #000000);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: repeat;
+  background-image: url("../assets/spaceman2.jpg");
   height: 100vh;
-  color: white;
+  color: #eee;
   font-family: Arial, sans-serif;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: dynamicBackground 8s ease-in-out infinite; /* Animation de défilement */
 }
 
 .back-button {

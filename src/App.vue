@@ -14,6 +14,7 @@ export default {
 
 html, body {
   margin: 0;
-  scroll-behavior: smooth;  
+  scroll-behavior: smooth; 
+  font-family: 'Times New Roman'; 
   }
 </style>
