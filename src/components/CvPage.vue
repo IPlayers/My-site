@@ -2,7 +2,11 @@
   <div class="cv-section">
     <button @click="navigateToMainPage" class="back-button">Retour à la page principale</button>
     <h1>Mon CV</h1>
-    <p>Consultez mon parcours professionnel ici.</p>
+    <p>Consultez mon parcours professionnel ici: Intégrer mon nouveau CV 
+      (diviser par deux dans la longueur pour le responsive et
+      dans la largeur pour le pc) et faire des sections cliquables sur le même cv avec des menus déroulants
+      ou liens ou autres
+    </p>
   </div>
   <!-- Faire des divs de formes géométriques pour agrémenter des infos -->
 </template>

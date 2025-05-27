@@ -23,13 +23,13 @@ export default {
 
 @keyframes dynamicBackground {
   0% {
-    background-size: 100%;
+    background-size: 97%;
   }
   50% {
-    background-size: 105%;
+    background-size: 99%;
   }
   100% {
-    background-size: 100%;
+    background-size: 97%;
   }
 }
 

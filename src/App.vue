@@ -15,6 +15,7 @@ export default {
 html, body {
   margin: 0;
   scroll-behavior: smooth; 
-  font-family: 'Times New Roman'; 
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 500;
   }
 </style>
