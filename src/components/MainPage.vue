@@ -1,6 +1,6 @@
 <template>
   <div class="main-page">
-    <h1 class="page-title">Bienvenue sur mon site</h1>
+    <h1 class="page-title">Maxime MOIROUD</h1>
     <div class="grid-container">
 
       <div class="btn btn-three first" @click="navigateTo('CvPage')">

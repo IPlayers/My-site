@@ -1,55 +1,482 @@
 <template>
-  <div class="cv-section">
-    <button @click="navigateToMainPage" class="back-button">Retour à la page principale</button>
-    <h1>Mon CV</h1>
-    <p>Consultez mon parcours professionnel ici: Intégrer mon nouveau CV 
-      (diviser par deux dans la longueur pour le responsive et
-      dans la largeur pour le pc) et faire des sections cliquables sur le même cv avec des menus déroulants
-      ou liens ou autres
-    </p>
+  <div class="cv-page">
+    <div class="top-bar">
+      <button @click="$router.go(-1)" class="back-button">← Retour</button>
+    </div>
+
+    <h1 class="cv-title">Mon Curriculum Vitæ</h1>
+
+    <main class="cv-content">
+      <div class="cv-columns">
+        <!-- Colonne gauche : image du CV -->
+        <div class="cv-image">
+          <h2 class="cv-download-title">Télécharge mon CV via l'image</h2>
+          <img
+            src="@/assets/CV_2025.png"
+            alt="CV"
+            @click="openModalAt($event)"
+            style="cursor:pointer;"
+          />
+        </div>
+        <!-- Colonne droite : contenu dynamique -->
+        <section class="cv-dynamique">
+          <h2 class="cv-dynamique-title">Détails et explications</h2>
+          <div class="cv-toggle-btns">
+            <button @click="expandAll" class="cv-toggle-btn">Tout déplier</button>
+            <button @click="collapseAll" class="cv-toggle-btn">Tout replier</button>
+          </div>
+
+          <h3 class="cv-dynamique-subtitle">Compétences Transversales</h3>
+          <div v-for="(item, index) in competencesTransversales" :key="'ct-'+index">
+            <div @click="toggleSection('ct', index)" class="cv-item">
+              <strong>{{ item.title }}</strong>
+            </div>
+            <div v-show="isVisible('ct', index)" class="cv-detail">
+              <p>{{ item.detail }}</p>
+            </div>
+          </div>
+
+          <h3 class="cv-dynamique-subtitle">Compétences Techniques</h3>
+          <div v-for="(item, index) in competencesTechniques" :key="'tech-'+index">
+            <div @click="toggleSection('tech', index)" class="cv-item">
+              <strong>{{ item.title }}</strong>
+            </div>
+            <div v-show="isVisible('tech', index)" class="cv-detail">
+              <p>{{ item.detail }}</p>
+            </div>
+          </div>
+
+          <h3 class="cv-dynamique-subtitle">Expériences - Consultant EDI</h3>
+          <div v-for="(item, index) in consultantEdi" :key="'edi-'+index">
+            <div @click="toggleSection('edi', index)" class="cv-item">
+              <strong>{{ item.title }}</strong>
+            </div>
+            <div v-show="isVisible('edi', index)" class="cv-detail">
+              <p>{{ item.detail }}</p>
+            </div>
+          </div>
+
+          <h3 class="cv-dynamique-subtitle">Expériences - Autres</h3>
+          <div v-for="(item, index) in autresExperiences" :key="'autres-'+index">
+            <div @click="toggleSection('autres', index)" class="cv-item">
+              <strong>{{ item.title }}</strong>
+            </div>
+            <div v-show="isVisible('autres', index)" class="cv-detail">
+              <p>{{ item.detail }}</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Modal de choix du format -->
+    <div v-if="showModal" class="cv-modal-overlay" @click.self="closeModal">
+      <div
+        class="cv-modal"
+        :style="{
+          position: 'fixed',
+          left: modalX + 'px',
+          top: modalY + 'px',
+          width: '320px',
+          maxWidth: '90vw'
+        }"
+      >
+        <h3>Choisissez le format de téléchargement</h3>
+        <button @click="downloadFile('png')" class="modal-btn">PNG</button>
+        <button @click="downloadFile('pdf')" class="modal-btn">PDF</button>
+        <button @click="closeModal" class="modal-close">Annuler</button>
+        <div
+          class="cv-modal-arrow"
+          :style="{ left: arrowOffset + 'px' }"
+        ></div>
+      </div>
+    </div>
   </div>
-  <!-- Faire des divs de formes géométriques pour agrémenter des infos -->
 </template>
 
 <script>
 export default {
-  name: 'CvPage',
+  data() {
+    return {
+      visible: {},
+      showModal: false,
+      modalX: 0,
+      modalY: 0,
+
+      competencesTransversales: [
+        { title: "Gestion de projet Agile et Scrum", detail: "Détail à compléter..." },
+        { title: "Communication claire, proactive et synthétique", detail: "Détail à compléter..." },
+        { title: "Organisation et adaptabilité", detail: "Détail à compléter..." },
+        { title: "Maîtrise des outils de pilotage", detail: "Détail à compléter..." }
+      ],
+
+      competencesTechniques: [
+        { title: "Bases de données SQL", detail: "Détail à compléter..." },
+        { title: "Python (IA et automatisation)", detail: "Détail à compléter..." },
+        { title: "JS (application mobile et web)", detail: "Détail à compléter..." },
+        { title: "C++ / C# avec Unreal Engine et Unity", detail: "Détail à compléter..." },
+        { title: "C : Programmation d'un drone", detail: "Détail à compléter..." },
+        { title: "EDI / SAP", detail: "Détail à compléter..." },
+        { title: "PHP (Laravel) / HTML, CSS", detail: "Détail à compléter..." }
+      ],
+
+      consultantEdi: [
+        { title: "Intégration & Déploiement flux EDI entre ERP internes et partenaires externes", detail: "Détail à compléter..." },
+        { title: "Support et maintenance de niveau 3 et documentation", detail: "Détail à compléter..." },
+        { title: "Sécurité & conformité des connexions et gestion des certificats", detail: "Détail à compléter..." },
+        { title: "Collaboration & projets, coordination fonctionnelle et animation de réunions techniques", detail: "Détail à compléter..." }
+      ],
+
+      autresExperiences: [
+        { title: "Création d'une application en C++ de communication USB ordinateur/casque VR", detail: "Détail à compléter..." },
+        { title: "Développement web backend & frontend sur Laravel pour emailing", detail: "Détail à compléter..." },
+        { title: "Développement logiciel embarqué pour smart window", detail: "Détail à compléter..." },
+        { title: "Adaptation protocole EnOcean", detail: "Détail à compléter..." }
+      ],
+
+      arrowOffset: 0,
+    };
+  },
   methods: {
-    navigateToMainPage() {
-      this.$router.push({ name: 'MainPage' });
+    toggleSection(section, index) {
+      const key = `${section}-${index}`;
+      this.visible[key] = !this.visible[key];
+    },
+    isVisible(section, index) {
+      return this.visible[`${section}-${index}`];
+    },
+    closeModal() {
+      this.showModal = false;
+    },
+    downloadFile(format) {
+      let file, filename;
+      if (format === 'png') {
+        file = require('@/assets/CV_2025.png');
+        filename = 'CV_Maxime_MOIROUD.png';
+      } else if (format === 'pdf') {
+        file = '/CV_2025.pdf'; // Chemin relatif depuis public/
+        filename = 'CV_Maxime_MOIROUD.pdf';
+      }
+      // Création d'un lien temporaire pour le téléchargement
+      const link = document.createElement('a');
+      link.href = file;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      this.closeModal();
+    },
+    openModalAt(event) {
+      const modalWidth = 320;
+      const modalHeight = 220;
+      let x = event.clientX - modalWidth / 2;
+      let y = event.clientY - modalHeight - 42; // 42px pour la pointe sous la modale (42 car... ;) )
+
+      // Empêche la modale de sortir de l'écran horizontalement
+      x = Math.max(16, Math.min(window.innerWidth - modalWidth - 16, x));
+      // Empêche la modale de sortir en haut
+      y = Math.max(16, y);
+
+      // La pointe doit être centrée sous la souris
+      this.arrowOffset = event.clientX - x;
+
+      this.modalX = x;
+      this.modalY = y;
+      this.showModal = true;
+    },
+    expandAll() {
+      // Ouvre tous les items de toutes les sections
+      [
+        { arr: this.competencesTransversales, prefix: 'ct' },
+        { arr: this.competencesTechniques, prefix: 'tech' },
+        { arr: this.consultantEdi, prefix: 'edi' },
+        { arr: this.autresExperiences, prefix: 'autres' }
+      ].forEach(section => {
+        section.arr.forEach((_, idx) => {
+          this.visible[`${section.prefix}-${idx}`] = true;
+        });
+      });
+    },
+    collapseAll() {
+      // Ferme tous les items de toutes les sections
+      [
+        { arr: this.competencesTransversales, prefix: 'ct' },
+        { arr: this.competencesTechniques, prefix: 'tech' },
+        { arr: this.consultantEdi, prefix: 'edi' },
+        { arr: this.autresExperiences, prefix: 'autres' }
+      ].forEach(section => {
+        section.arr.forEach((_, idx) => {
+          this.visible[`${section.prefix}-${idx}`] = false;
+        });
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped>
+.cv-page {
+  background: linear-gradient(180deg, #0f172a, #1e293b);
+  min-height: 100vh;
+  color: #f2f2f2;
+  padding: 2rem;
+}
 
-.cv-section {
-  background-size: cover;
-  background-position: center center;
-  background-repeat: repeat;
-  background-image: url("../assets/magicpattern-confetti.png");
-  height: 100vh;
-  padding: 20px;
-  color: #999;
-  font-family: Arial, sans-serif;
+.cv-title {
   text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.div-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
 }
 
 .back-button {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 10px 20px;
-  background-color: #0057B7;
-  color: white;
+  padding: 10px 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  background-color: #FFD700;
+  color: #000;
+  font-weight: bold;
   cursor: pointer;
-  transition: all 1s;
+  transition: background 0.3s ease;
 }
 
 .back-button:hover {
-  background-color: #89CFF0;
+  background-color: white;
+  color: #000;
+}
+
+.cv-content {
+  max-width: 100rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.cv-columns {
+  display: flex;
+  gap: 2rem;
+  margin: 2rem 0;
+  justify-content: center; /* centre le groupe de colonnes */
+  align-items: flex-start;
+}
+
+.cv-image {
+  flex: 1 1 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 2rem 1.2rem;
+  min-width: 260px;
+  /* max-width: 350px;  <-- retire cette ligne */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  margin-left: 0.5rem; /* ajoute une petite marge à gauche */
+}
+
+.cv-download-title {
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #ffffff;
+}
+
+.cv-image a {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  transition: box-shadow 0.2s;
+}
+
+.cv-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: contain;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.cv-dynamique-title {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #FFffff;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.cv-dynamique-subtitle {
+  font-size: 1.15rem;
+  margin-top: 2rem;
+  margin-bottom: 0.8rem;
+  color: #fff;
+  font-weight: 600;
+  text-align: left;
+  border-left: 4px solid #FFD700;
+  padding-left: 0.7rem;
+}
+
+.cv-item {
+  cursor: pointer;
+  padding: 0.5rem;
+  margin: 0.3rem 0;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+
+.cv-item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.cv-detail {
+  margin-left: 1rem;
+  margin-top: 0.3rem;
+  color: #f2f2f2;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-left: 4px solid #ffffff;
+  border-radius: 4px;
+}
+
+.cv-dynamique {
+  flex: 1 1 50%;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(4px);
+  border-radius: 18px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  min-width: 0;
+  margin-left: 2rem; /* espace entre les deux colonnes */
+}
+
+.cv-toggle-btns {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.cv-toggle-btn {
+  padding: 0.5rem 1.2rem;
+  background: #FFD700;
+  color: #1e293b;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+.cv-toggle-btn:hover {
+  background: #fffbe7;
+}
+
+/* Modal styles */
+.cv-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.cv-modal {
+  position: fixed;
+  background: #1e293b;
+  padding: 2rem 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  text-align: center;
+  z-index: 1001;
+  /* Pour la bulle, arrondi plus marqué */
+  border-bottom-left-radius: 32px 24px;
+  border-bottom-right-radius: 32px 24px;
+}
+
+.cv-modal h3 {
+  color: #FFD700;
+  margin-bottom: 1.5rem;
+}
+
+.modal-btn {
+  margin: 0 1rem;
+  padding: 0.7rem 2rem;
+  background: #FFD700;
+  color: #1e293b;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background 0.2s;
+}
+
+.modal-btn:hover {
+  background: #fffbe7;
+}
+
+.modal-close {
+  display: block;
+  margin: 1.5rem auto 0 auto;
+  background: none;
+  color: #fff;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.cv-modal-arrow {
+  position: absolute;
+  top: 100%;
+  /* left sera défini dynamiquement */
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-top: 18px solid #1e293b;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.18));
+}
+
+/* Responsive : passe en colonne sur petit écran */
+@media (max-width: 900px) {
+  .cv-columns {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .cv-image, .cv-dynamique {
+    max-width: 100%;
+    padding: 1rem;
+  }
+  .cv-dynamique {
+    margin-left: 0; /* Ajoute cette ligne pour enlever la marge à gauche */
+  }
+}
+
+/* Styles spécifiques pour les petits écrans (mobile) */
+@media (max-width: 600px) {
+  .cv-modal {
+    left: 50% !important;
+    top: 30vh !important;
+    transform: translate(-50%, 0) !important;
+    width: 95vw !important;
+    min-width: 0 !important;
+    max-width: 98vw !important;
+  }
 }
 </style>
