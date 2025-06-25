@@ -10,7 +10,7 @@
       <div class="cv-columns">
         <!-- Colonne gauche : image du CV -->
         <div class="cv-image">
-          <h2 class="cv-download-title">Télécharge mon CV via l'image</h2>
+          <h2 class="cv-download-title">Télécharge mon CV via l'image ↓</h2>
           <img
             src="@/assets/CV_2025.png"
             alt="CV"
@@ -26,43 +26,33 @@
             <button @click="collapseAll" class="cv-toggle-btn">Tout replier</button>
           </div>
 
-          <h3 class="cv-dynamique-subtitle">Compétences Transversales</h3>
-          <div v-for="(item, index) in competencesTransversales" :key="'ct-'+index">
-            <div @click="toggleSection('ct', index)" class="cv-item">
-              <strong>{{ item.title }}</strong>
-            </div>
-            <div v-show="isVisible('ct', index)" class="cv-detail">
-              <p>{{ item.detail }}</p>
-            </div>
-          </div>
-
-          <h3 class="cv-dynamique-subtitle">Compétences Techniques</h3>
+          <h3 class="cv-dynamique-subtitle">Compétences - Techniques</h3>
           <div v-for="(item, index) in competencesTechniques" :key="'tech-'+index">
             <div @click="toggleSection('tech', index)" class="cv-item">
               <strong>{{ item.title }}</strong>
             </div>
             <div v-show="isVisible('tech', index)" class="cv-detail">
-              <p>{{ item.detail }}</p>
+              <p v-html="item.detail"></p>
             </div>
           </div>
 
-          <h3 class="cv-dynamique-subtitle">Expériences - Consultant EDI</h3>
+          <h3 class="cv-dynamique-subtitle">Expériences professionnelles - Consultant EDI</h3>
           <div v-for="(item, index) in consultantEdi" :key="'edi-'+index">
             <div @click="toggleSection('edi', index)" class="cv-item">
               <strong>{{ item.title }}</strong>
             </div>
             <div v-show="isVisible('edi', index)" class="cv-detail">
-              <p>{{ item.detail }}</p>
+              <p v-html="item.detail"></p>
             </div>
           </div>
 
-          <h3 class="cv-dynamique-subtitle">Expériences - Autres</h3>
+          <h3 class="cv-dynamique-subtitle">Projets personnels</h3>
           <div v-for="(item, index) in autresExperiences" :key="'autres-'+index">
             <div @click="toggleSection('autres', index)" class="cv-item">
               <strong>{{ item.title }}</strong>
             </div>
             <div v-show="isVisible('autres', index)" class="cv-detail">
-              <p>{{ item.detail }}</p>
+              <p v-html="item.detail"></p>
             </div>
           </div>
         </section>
@@ -103,35 +93,80 @@ export default {
       modalX: 0,
       modalY: 0,
 
-      competencesTransversales: [
-        { title: "Gestion de projet Agile et Scrum", detail: "Détail à compléter..." },
-        { title: "Communication claire, proactive et synthétique", detail: "Détail à compléter..." },
-        { title: "Organisation et adaptabilité", detail: "Détail à compléter..." },
-        { title: "Maîtrise des outils de pilotage", detail: "Détail à compléter..." }
-      ],
-
       competencesTechniques: [
-        { title: "Bases de données SQL", detail: "Détail à compléter..." },
-        { title: "Python (IA et automatisation)", detail: "Détail à compléter..." },
-        { title: "JS (application mobile et web)", detail: "Détail à compléter..." },
-        { title: "C++ / C# avec Unreal Engine et Unity", detail: "Détail à compléter..." },
-        { title: "C : Programmation d'un drone", detail: "Détail à compléter..." },
-        { title: "EDI / SAP", detail: "Détail à compléter..." },
-        { title: "PHP (Laravel) / HTML, CSS", detail: "Détail à compléter..." }
+        { title: "Bases de données SQL/NoSQL",
+        detail: "J'ai pu en avoir l'utilisation à de multiples reprises lors de projets. Également une maîtrise via MySQL pour MariaDB ou SQLite pour app mobile."
+          + "Lors de la fin de mon cycle d'ingénieurie, mon option m'a permis d'avoir une initiation au NoSQL pour du bigdata via MondoGB." },
+
+        { title: "Python (IA et automatisation)",
+        detail: "Le python est le premier langage sur lequel j'ai programmé au lycée,"
+          + " je l'ai toujours utilisé nativement et encore aujourd'hui pour plusieurs projets où j'ai besoin d'une automatisation de quoi que ce soit sur des pages web ou sur des applis perso."
+          + " J'ai aussi pu apprivoiser certaines IA avec Python." },
+
+        { title: "JS (application mobile et web)",
+        detail: "J'ai pu exploré le JS sous plusieurs angles, avec et sans framework comme ce site avec VueJS."
+          + " J'ai également pu avoir à toucher à React JS et Angular JS dans le contexte de projets coopératifs." },
+
+        { title: "Typescript",
+        detail: "Comme décrit, mon utilisation du typescript s'est toujours faite avec Angular et" 
+          + " principalement dans la création d'applications mobiles en tant que projets personnels sur plusieurs domaines comme des jeux." },
+
+        { title: "C++ / C# avec Unreal Engine et Unity",
+        detail: "Ma première appréciation du C++ s'est fait à travers l'application de ce que j'avais pu apprendre en POO avec JAVA sur une application initialement en C."
+          + " Cela m'a ouvert la porte à plusieurs projets réalisés sous Unreal Engine. Pour une plus grande expertise dans le domaine des jeux-vidéos,"
+          + " je me suis donc formé pour mieux comprendre les blue prints pour Unreal Engine ainsi que le C# pour avoir le choix d'utiliser Unity à la place de UE si nécessaire."
+          + " Je n'ai utilisé Unreal Engine que dans le cadre professionnel en tant que part d'un plus grand projet alors que j'ai pu explorer plus en détails Unity à travers des projets persos ainsi que des projets de groupe de plus grande ampleur lors de mes études." },
+
+        { title: "C : Programmation d'un drone",
+        detail: "Lors de ma formation à l'IUT pour l'informatique industrielle, j'utilisais principalement le C."
+          + " J'ai pu comprendre comment l'optimisation de la mémoire pouvait avoir une place importante et le projet final de mon diplôme s'est principalement tourné autour de ça et j'ai donc pu finaliser le développement du programme de commande d'un quadricoptère." },
+
+        { title: "EDI / SAP",
+        detail: "Plus détails ci-dessous dans la partie <i>Expériences professionnelles - Consultant EDI<i>." },
+
+        { title: "PHP (Laravel) / HTML, CSS",
+        detail: "L'intégralité de mon expérience lors de mon alternance de 3ème année d'école d'ingénieur s'est porté autour de ces technos."
+          + " J'ai pu appliquer ces technologies pour la maintenance et l'adaptation d'un site web existant à certaines demandes ainsi qu'à la création de A à Z d'un espace FAQ."
+          + " L'HTML/CSS étant au centre de n'importe quel projet que j'ai pu faire comme ce site, je reste informé des dernières versions et de leurs évolutions."
+          + "Dernièrement, j'ai aussi pu utiliser php dans d'autres projets web personnels qui nécessitaient une certaine permissivité que procure le php." }
+
       ],
 
       consultantEdi: [
-        { title: "Intégration & Déploiement flux EDI entre ERP internes et partenaires externes", detail: "Détail à compléter..." },
-        { title: "Support et maintenance de niveau 3 et documentation", detail: "Détail à compléter..." },
-        { title: "Sécurité & conformité des connexions et gestion des certificats", detail: "Détail à compléter..." },
-        { title: "Collaboration & projets, coordination fonctionnelle et animation de réunions techniques", detail: "Détail à compléter..." }
+        { title: "Intégration & Déploiement flux EDI entre ERP internes et partenaires externes",
+        detail: "Mise en place de flux EDI entre ERP internes et partenaires externes (clients, fournisseurs, logisticiens)."
+          + " Développement et paramétrage de mappings EDI (EDIFACT, ANSI X12, XML, CSV) et intégration des flux dans SAP PI/PO."
+          + " Participation aux phases de recette, tests unitaires et validation des flux avant déploiement des flux sur des environnements de pré-production et production." },
+
+        { title: "Support et maintenance de niveau 3 et documentation.",
+        detail: "Support niveau 2/3 : analyse et résolution des anomalies techniques liées à l’échange de fichiers."
+          + " Documentation des flux et surveillance des flux (monitoring des échanges en temps réel)." },
+
+        { title: "Sécurité & conformité des connexions et gestion des certificats",
+        detail: "Mise en place de connexions sécurisées : AS2, SFTP, HTTPS en suivant les conformités RGPD et normes sectorielles."
+          + " Gestion des certificats de chiffrement et signature." },
+
+        { title: "Collaboration & projets, coordination fonctionnelle et animation de réunions techniques",
+        detail: "Coordination avec les équipes fonctionnelles et techniques pour le déploiement de nouveaux partenaires."
+          + " Participation à des projets de migration (changement de plateforme ou de partenaire)."
+          + " Création de spécifications techniques EDI à partir de cahiers des charges métiers."
+          + " Animation de réunions techniques avec les partenaires pour la validation des échanges." }
+
       ],
 
       autresExperiences: [
-        { title: "Création d'une application en C++ de communication USB ordinateur/casque VR", detail: "Détail à compléter..." },
-        { title: "Développement web backend & frontend sur Laravel pour emailing", detail: "Détail à compléter..." },
-        { title: "Développement logiciel embarqué pour smart window", detail: "Détail à compléter..." },
-        { title: "Adaptation protocole EnOcean", detail: "Détail à compléter..." }
+        { title: "Manager d'équipes esports de 2012 à 2022",
+        detail: "Pour plus de détails, <a href='https://ton-site.fr/esport' target='_blank' rel='noopener noreferrer' style='color:#FFD700;text-decoration:underline;'>rendez-vous sur la partie Esport de mon site</a>." },
+
+        { title: "Coach d'équipes et personnel esport entre 2018 et 2024",
+        detail: "Pour plus de détails, <a href='https://ton-site.fr/esport' target='_blank' rel='noopener noreferrer' style='color:#FFD700;text-decoration:underline;'>rendez-vous sur la partie Esport de mon site</a>." },
+
+        { title: "Joueur semi pro sur Rocket League (2022 / top 5000 EU : top 0.1%) et League of Legends (2025 / top 2000 EU : top 0.05%)",
+        detail: "Pour plus de détails, <a href='https://maximemoiroud.fr/esport' target='_blank' rel='noopener noreferrer' style='color:#FFD700;text-decoration:underline;'>rendez-vous sur la partie Esport de mon site</a>." },
+
+        { title: "Joueur, coach et arbitre de basket entre 2012 et 2018",
+        detail: "A Voiron, Joueur de basket au niveau départemental de 2012 à 2013 puis niveau régional de 2014 à 2016.<br> Diplôme d'arbitre officiel départemental d'Isère obtenu en 2016 et exercé jusqu'en 2018.<br> Coach d'une équipe départementale en 2017." }
+
       ],
 
       arrowOffset: 0,
@@ -187,7 +222,6 @@ export default {
     expandAll() {
       // Ouvre tous les items de toutes les sections
       [
-        { arr: this.competencesTransversales, prefix: 'ct' },
         { arr: this.competencesTechniques, prefix: 'tech' },
         { arr: this.consultantEdi, prefix: 'edi' },
         { arr: this.autresExperiences, prefix: 'autres' }
@@ -200,7 +234,6 @@ export default {
     collapseAll() {
       // Ferme tous les items de toutes les sections
       [
-        { arr: this.competencesTransversales, prefix: 'ct' },
         { arr: this.competencesTechniques, prefix: 'tech' },
         { arr: this.consultantEdi, prefix: 'edi' },
         { arr: this.autresExperiences, prefix: 'autres' }
@@ -271,7 +304,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.5);
   border-radius: 18px;
   padding: 2rem 1.2rem;
   min-width: 260px;
@@ -349,7 +382,7 @@ export default {
 
 .cv-dynamique {
   flex: 1 1 50%;
-  background: rgba(0, 0, 0, 0.95);
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
   border-radius: 18px;
   padding: 2rem 1.5rem;
