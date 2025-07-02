@@ -93,7 +93,6 @@ export default {
       this.jeuSelectionne = null;
     },
     getImageForJeu(nom) {
-      // Mets ici le chemin de chaque image selon le jeu
       if (nom === 'League of Legends') return require('@/assets/LFT_cv.png');
       if (nom === 'Rocket League') return require('@/assets/logo_jeux/RL_logo.png');
       if (nom === 'World of Warcraft') return require('@/assets/logo_jeux/WoW_logo.png');
@@ -138,7 +137,7 @@ export default {
   animation: dynamicBackground 10s ease-in-out infinite;
 }
 
-/* On isole les éléments au-dessus du fond animé */
+/* Isolation des éléments au-dessus du fond animé */
 .esport-section > * {
   position: relative;
   z-index: 1;
@@ -337,7 +336,7 @@ export default {
   text-align: center;
 }
 
-/* MODALE AUTRES JEUX */
+/* Modale autres jeux */
 .othergame-modal-text {
   width: 100%;
   min-height: 220px;
@@ -350,7 +349,7 @@ export default {
   padding: 2.5rem 1.5rem;
 }
 
-/* RESPONSIVE */
+/* Responsive */
 @media (max-width: 900px) {
   .esport-logo {
     width: 70px;
