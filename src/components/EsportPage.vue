@@ -19,8 +19,11 @@
       @click.self="fermerFenetre"
     >
       <div class="esport-modal-content">
-        <button class="modal-close-btn" @click="fermerFenetre">✕</button>
-        <h2 class="esport-modal-title">{{ jeuSelectionne }}</h2>
+        <!-- Remplace la partie titre et bouton dans la modale par ceci -->
+        <div class="esport-modal-header">
+          <h2 class="esport-modal-title">{{ jeuSelectionne }}</h2>
+          <button class="modal-close-btn" @click="fermerFenetre">✕</button>
+        </div>
 
         <!-- League of Legends : image + texte + zone bas -->
         <div v-if="jeuSelectionne === 'League of Legends'">
@@ -35,7 +38,8 @@
             </div>
           </div>
           <div class="lol-modal-bottom">
-            Ici tu peux ajouter un texte complémentaire ou des infos supplémentaires sur League of Legends.
+            Concrètement, mon expérience sur League of Legends autant en tant que joueur, coach ou manager m'a permis de développer des compétences intéressantes sur le point de vue professionnel classique.
+            <br>Que ça soit à travers la <strong>détermination</strong>, la <strong>gestion du stress</strong> ou encore le <strong>travail d'équipe</strong> en tant que joueur ou encore la <strong>gestion de projet</strong>, la <strong>communication</strong> et le <strong>leadership</strong> en tant que coach ou manager.
           </div>
         </div>
 
@@ -58,6 +62,12 @@ export default {
           nom: 'League of Legends',
           logo: 'LoL_logo.png',
           description: "League of Legends est un MOBA compétitif où j'ai managé et coaché plusieurs équipes, participé à des LAN et développé des stratégies d'équipe."
+          + "<br><br>L'image à gauche est comme un CV pour mes activités sur LoL. Il permet de facilement comprendre quel joueur je suis et quelles sont mes compétences et expériences."
+          + "<br><br>League of legends a été un pilier de mon parcours e-sportif, où j'ai non seulement joué à un niveau compétitif élevé, mais aussi géré et coaché des équipes."
+          + " J'ai participé à de nombreuses LANs et développé des stratégies d'équipe qui m'ont permis de comprendre en profondeur le jeu et ses mécaniques."
+          + "<br><br>Au meilleur de ma carrière, j'ai atteint le rang Master+, c'est d'abord un engagement mais aussi un certain exploit"
+          + " puisque cela m'a permis de me hisser dans le top 0.05% des joueurs classés."
+          + "<br>Autrement dit, je jouais parmis les 2000 meilleurs joueurs d'Europe sur environ 4 millions de joueurs en mode compétitif."
         },
         {
           nom: 'Rocket League',
